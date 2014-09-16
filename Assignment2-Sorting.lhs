@@ -81,8 +81,21 @@ public static void swap(int[] array, int p1, int p2) {
 
 2.5. Write insertion sort in Haskell by implementing the key idea of insertion in a functional way. Simply trying to duplicate every detail of the Java code is not recommended. Feel free to define extra functions to help you. Write your code in literate programming style, explaining what you are doing.
 
-[TODO: Haskell Code Here, add >]
-insertionSort :: Ord a => [a] -> [a]
+[DONE: Haskell Code Here, add >]
+
+insertionSort - Takes a list and sorts it using insertion sort.
+It goes through each item in the given list and inserts the item
+into a new list, keeping that list sorted as it inserts.
+
+>insertionSort :: Ord a => [a] -> [a]
+>insertionSort arr = insert [] arr
+>  where
+>    insert :: Ord b => [b] -> [b] -> [b]
+>    insert []     (x:xs) = insert [x] xs
+>    insert x      []     = x
+>    insert (x:xs) (y:ys)
+>      | x >= y    = (insert (y:x:xs) ys)
+>      | otherwise = (insert (insert xs (y:ys)) [x])
 
 ----------------------------------------------------------------
 
