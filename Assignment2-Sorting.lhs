@@ -185,8 +185,24 @@ public static void merge(int[] array, int start, int mid, int end) {
 
 4.5. Write merge sort in Haskell by implementing the key idea of merging in a functional way. Simply trying to duplicate every detail of the Java code is not recommended. Feel free to define extra functions to help you. Write your code in literate programming style, explaining what you are doing. If you get stuck, you can find some hints in the book.
 
-[TODO: Haskell Code Here, add >]
-mergeSort :: Ord a => [a] -> [a]
+[DONE: Haskell Code Here, add >]
+
+mergeSort - Takes a list and sorts it using merge sort. It splits
+the given list into two, recursively calls mergeSort on each list,
+and merges the results together.
+
+>mergeSort :: Ord a => [a] -> [a]
+>mergeSort []  = []
+>mergeSort [x] = [x]
+>mergeSort x   = merge (mergeSort h1) (mergeSort h2)
+>  where
+>    (h1,h2) = splitAt ((length x) `quot` 2) x
+>    merge :: Ord b => [b] -> [b] -> [b]
+>    merge x      []     = x
+>    merge []     x      = x
+>    merge (x:xs) (y:ys)
+>      | x <= y    = x:(merge xs (y:ys))
+>      | otherwise = y:(merge (x:xs) ys)
 
 ----------------------------------------------------------------
 
