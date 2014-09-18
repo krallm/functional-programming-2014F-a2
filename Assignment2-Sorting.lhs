@@ -129,8 +129,15 @@ public static void selectionSort(int[] array) {
 
 3.5. Write selection sort in Haskell by implementing the key idea of selection in a functional way. Simply trying to duplicate every detail of the Java code is not recommended. Feel free to define extra functions to help you. Write your code in literate programming style, explaining what you are doing.
 
-[TODO: Haskell Code Here, add >]
-selectionSort :: Ord a => [a] -> [a]
+[DONE: Haskell Code Here, add >]
+
+>selectionSort :: Ord a => [a] -> [a]
+>selectionSort [] = []
+>selectionSort xs = let x = maximum xs in selectionSort (remove x xs) ++ [x] 
+>  where remove _ [] = []
+>        remove a (x:xs)
+>          | x == a = xs
+>          | otherwise = x : remove a xs
 
 ----------------------------------------------------------------
 
