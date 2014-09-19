@@ -222,7 +222,7 @@ created/returned.
 
 It is moving around elements in the array, given a certain index range: [start, mid) and [mid, end].
 Certain segments of the existing array is being merged using the same method as described in 4.1,
-recursively. 
+recursively.
 
 4.4. How could you re-write this algorithm in Java in a functional programming style? You do not need to write Java code ... just describe some ways you could change the code above.
 
@@ -280,18 +280,18 @@ This is a "higher-order" function. It takes a function as input, specifically a 
 
 [DONE: Haskell Code Here, change function definition]
 
-correctOutputForInput xs ys = and [(isSorted ys), (isRearranged xs ys)]
-
->correctOutputForInput xs ys = isSorted ys
+>correctOutputForInput xs ys = and [(isSorted ys), (isRearranged xs ys)]
 >  where
 >    isSorted :: Ord a => [a] -> Bool
 >    isSorted []        = True
 >    isSorted [g]       = True
->    isSorted (g:h:hs)  = and [(g <= h), (isSorted (h:hs))]
+>    isSorted (g:h:hs)
+>      | g > h          = False
+>      | otherwise      = isSorted (h:hs)
 >    isRearranged :: Ord a => [a] -> [a] -> Bool
->    isRearranged []     ys = False
->    isRearranged xs     [] = False
->    isRearranged []     [] = True
+>    isRearranged []     [y] = False
+>    isRearranged [x]    []  = False
+>    isRearranged []     []  = True
 >    isRearranged (x:xs) ys = isRearranged xs (delete x ys)
 >      where
 >        delete j []        = []
@@ -313,7 +313,7 @@ correctOutputForInput xs ys = and [(isSorted ys), (isRearranged xs ys)]
 >case7 = ([1..20] ++ [15..40])
 >case8 = ([(-50),(-48)..(-26)] ++ [(-30),(-32)..(-50)])
 >case9 = [5,5,5,5,5]
->case10 = [1000..1]
+>case10 = [1000,999..1]
 
 >cases = [case1, case2, case3, case4, case5, case6, case7, case8, case9, case10]
 >checkAllShowList f = map (check f) cases
