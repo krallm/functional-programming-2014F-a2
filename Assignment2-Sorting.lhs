@@ -126,7 +126,10 @@ into a new list, keeping that list sorted as it inserts.
 
 3.1. What is "selection sort"? Why is it called "selection sort"?
 
-[TODO]
+[DONE]
+
+It is selecting the minimum element in the unsorted array and appending
+that to the new array (or, selecting the max and prepending it).
 
 Look at this code for selection sort in Java and convince yourself that it is correct. Then answer the following questions.
 
@@ -142,15 +145,25 @@ public static void selectionSort(int[] array) {
 
 3.2. Is this an "in-place" algorithm? Why/why not?
 
-[TODO]
+[DONE]
+
+Yes, it is not creating/returning a new array, and is instead just swapping.
 
 3.3. In what way is this algorithm "selecting" something? How is selection done in the code? What is happening to the thing that is selected?
 
-[TODO]
+[DONE]
+
+The selection is done via swapping, sometimes multiple times in one pass via
+the for loop that checks j. The thing that is selected is moved to the front
+of the subsection of the array being looked at (array[i]).
 
 3.4. How could you re-write this algortihm in Java in a functional programming style? You do not need to write Java code ... just describe some ways you could change the code above.
 
-[TODO]
+[DONE]
+
+Have an ArrayList or similar class, and append to it the element with the least
+value still in the unsorted array. The unsorted array itself may need to be moved
+to an ArrayList, so that elements in it could be easily removed.
 
 3.5. Write selection sort in Haskell by implementing the key idea of selection in a functional way. Simply trying to duplicate every detail of the Java code is not recommended. Feel free to define extra functions to help you. Write your code in literate programming style, explaining what you are doing.
 
