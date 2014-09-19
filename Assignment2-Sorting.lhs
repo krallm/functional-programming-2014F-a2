@@ -35,21 +35,35 @@ CODE WARNING: All code must be written in the literate programming style. Fully 
 
 1.1. List all of the sorting algorithms you know. What do you know about these algorithms? Which are faster?
 
-[TODO]
+[DONE]
+
+Merge sort - Fast in general.
+Quick sort - Fast in general.
+Insertion sort - Efficient for small / mostly sorted lists.
+Bubble sort
 
 1.2. What is an "in-place" algorithm? What does "in-place" mean in the context of sorting algorithms? Which of the algorithms you listed in the previous question are "in-place"? Does it even make sense to ask this question? (You may look up the definition of "in-place" sorting if necessary.)
 
-[TODO]
+[DONE]
+
+The algorithm can just modify the existing list without creating/returning a new one.
+Merge sort, quick sort, and insertion sort can be implemented with in-place algorithms.
 
 1.3. Is it possible to write an "in-place" algorithm in Haskell? Why/why not? Give separate answers for both sorting algorithms specifically, and algorithms in general.
 
-[TODO]
+[DONE]
+
+For sorting algorithms, possibly, but it may not be a good idea or allow for efficient implementations.
+For algorithms in general, something like appending to a list (if that counts as an in-place algorithm).
 
 ----------------------------------------------------------------
 
 2.1. What is "insertion sort"? Why is it called "insertion sort"?
 
-[TODO]
+[DONE]
+
+The algorithm basically inserts each element into an empty array/list, while keeping that
+array/list sorted while it adds to it.
 
 Look at this code for insertion sort in Java and convince yourself that it is correct. Then answer the following questions.
 
@@ -69,15 +83,25 @@ public static void swap(int[] array, int p1, int p2) {
 
 2.2. Is this an "in-place" algorithm? Why/why not?
 
-[TODO]
+[DONE]
+
+Yes, it modifies the existing list.
 
 2.3. In what way is this algorithm "inserting" something? How is the insertion done in the code? Where in the array is something being inserted? What needs to happen to the contents of the array before insertion?
 
-[TODO]
+[DONE]
+
+The insertion is done via swapping, using the "swap" function. Elements are inserted
+depending on the arguments passed to swap. Before swapping, one of the array elements
+needs to be stored in a temp variable so it isn't lost.
 
 2.4. How could you re-write this algortihm in Java in a functional programming style? You do not need to write Java code ... just describe some ways you could change the code above.
 
-[TODO]
+[DONE]
+
+Construct an ArrayList (or similar class) with a size equal to the given list/array,
+and add each element of the given list to the ArrayList in a way that the ArrayList
+always remains sorted.
 
 2.5. Write insertion sort in Haskell by implementing the key idea of insertion in a functional way. Simply trying to duplicate every detail of the Java code is not recommended. Feel free to define extra functions to help you. Write your code in literate programming style, explaining what you are doing.
 
