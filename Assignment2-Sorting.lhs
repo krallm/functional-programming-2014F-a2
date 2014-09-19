@@ -39,6 +39,7 @@ CODE WARNING: All code must be written in the literate programming style. Fully 
 
 Merge sort - Fast in general.
 Quick sort - Fast in general.
+Selection sort - Inefficient with larger lists.
 Insertion sort - Efficient for small / mostly sorted lists.
 Bubble sort
 
@@ -167,7 +168,12 @@ public static void selectionSort(int[] array) {
 
 4.1. What is "merge sort"? Why is it called "merge sort"?
 
-[TODO]
+[DONE]
+
+It "separates" the array/list into one-element lists, and merges them into
+sorted lists. It keeps merging these sorted lists together until it ends up
+as the original list, but sorted. When merging, it goes through each sorted
+list left-to-right, adding whichever is lesser.
 
 Look at this code for merge sort in Java and convince yourself that it is correct. Then answer the following questions.
 
@@ -204,15 +210,26 @@ public static void merge(int[] array, int start, int mid, int end) {
 
 4.2. Is this an "in-place" algorithm? Why/why not?
 
-[TODO]
+[DONE]
+
+Yes, the merge function creates an array but it is not used past that specific function,
+and is instead copied into the existing array. Other than that no other arrays are
+created/returned.
 
 4.3. In what way is this algorithm "merging" something? How is the merge performed in the code? What exactly is being merged, and why does this lead to the desired result?
 
-[TODO]
+[DONE]
 
-4.4. How could you re-write this algortihm in Java in a functional programming style? You do not need to write Java code ... just describe some ways you could change the code above.
+It is moving around elements in the array, given a certain index range: [start, mid) and [mid, end].
+Certain segments of the existing array is being merged using the same method as described in 4.1,
+recursively. 
 
-[TODO]
+4.4. How could you re-write this algorithm in Java in a functional programming style? You do not need to write Java code ... just describe some ways you could change the code above.
+
+[DONE]
+
+Have the merge function take two arrays instead of certain index locations. mergeSort should have a definition
+where it takes two arrays, with a base case checking if the array lengths are 1 or less.
 
 4.5. Write merge sort in Haskell by implementing the key idea of merging in a functional way. Simply trying to duplicate every detail of the Java code is not recommended. Feel free to define extra functions to help you. Write your code in literate programming style, explaining what you are doing. If you get stuck, you can find some hints in the book.
 
@@ -239,11 +256,16 @@ and merges the results together.
 
 5.1. By this point, you have probably already tested some of your code informally. What have you done? Are you confident that the tests you have run so far are complete enough to cover all cases?
 
-[TODO]
+[DONE]
 
-5.2. It is generally a good idea to have test cases that can quickly verify the correct functioning of your code. Such testing is especially useful if your code changes, and you want to make sure you haven't broken anything. What sort of automated checks do you need in order to verify the correct functioning of a sorting algorithm? Given a specific input, what do you need to verify about the input in order to know that it is correct?
+Yes, all have been tested.
 
-[TODO]
+5.2. It is generally a good idea to have test cases that can quickly verify the correct functioning of your code. Such testing is especially useful if your code changes, and you want to make sure you haven't broken anything. What sort of automated checks do you need in order to verify the correct functioning of a sorting algorithm? Given a specific input, what do you need to verify about the input (output?) in order to know that it is correct?
+
+[DONE]
+
+Test cases would need to verify that certain arrays being sorted are actually sorted, and that the
+algorithm doesn't error on certain unexpected lists, such as empty lists or a one-element list.
 
 Consider the following function
 
@@ -256,9 +278,26 @@ This is a "higher-order" function. It takes a function as input, specifically a 
 
 >correctOutputForInput :: Ord a => [a] -> [a] -> Bool
 
-[TODO: Haskell Code Here, change function definition]
+[DONE: Haskell Code Here, change function definition]
 
->correctOutputForInput _ _ = True
+correctOutputForInput xs ys = and [(isSorted ys), (isRearranged xs ys)]
+
+>correctOutputForInput xs ys = isSorted ys
+>  where
+>    isSorted :: Ord a => [a] -> Bool
+>    isSorted []        = True
+>    isSorted [g]       = True
+>    isSorted (g:h:hs)  = and [(g <= h), (isSorted (h:hs))]
+>    isRearranged :: Ord a => [a] -> [a] -> Bool
+>    isRearranged []     ys = False
+>    isRearranged xs     [] = False
+>    isRearranged []     [] = True
+>    isRearranged (x:xs) ys = isRearranged xs (delete x ys)
+>      where
+>        delete j []        = []
+>        delete j (k:ks)
+>          | j == k         = ks
+>          | otherwise      = k:(delete j ks)
 
 5.4. Below are some test cases. If you define correctOutputForInput correctly, then you can use these lists with the check function to test your code. For example, (check selectionSort case1) will return True if both selectionSort and correctOutputForInput are correctly defined. Provide at least 7 more test cases to test your code. Your group may share test cases with anyone in the class, but at least half of the test cases below must be from your group. If you get test cases from others, you must identify who you got each test case from.
 
@@ -266,7 +305,19 @@ This is a "higher-order" function. It takes a function as input, specifically a 
 >case2 = [9,8,6,4,3,2]
 >case3 = [-34,6,1,-69,435,0,34,657,-179]
 
-[TODO: Haskell Code Here, add test cases]
+[DONE: Haskell Code Here, add test cases]
+
+>case4 = []
+>case5 = [50]
+>case6 = [100,99..(-100)]
+>case7 = ([1..20] ++ [15..40])
+>case8 = ([(-50),(-48)..(-26)] ++ [(-30),(-32)..(-50)])
+>case9 = [5,5,5,5,5]
+>case10 = [1000..1]
+
+>cases = [case1, case2, case3, case4, case5, case6, case7, case8, case9, case10]
+>checkAllShowList f = map (check f) cases
+>checkAll f         = and (checkAllShowList f)
 
 ----------------------------------------------------------------
 
