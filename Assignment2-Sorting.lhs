@@ -329,18 +329,26 @@ This is a "higher-order" function. It takes a function as input, specifically a 
 5. Did your test cases help you find/fix bugs?
 6. If there are still bugs, then describe them.
 
-[TODO]
+[DONE]
+
+We could not easily modify lists by getting/setting content via indicies. Our algorithms
+were very different from the Java versions, as none of them were "in-place" and relied
+heavily on recursion. They were all easier to write, as no confusing indicies were involved,
+and no swapping. We didn't have any real bugs in the sorting algorithms, and the test cases
+(along with manually looking at the results) seem to agree.
 
 Lastly, please rate this assignment on the following 1 to 10 scales:
 
-Difficulty (1 is easy, 10 hard): [TODO]
-Interesting (1 boring, 10 interesting): [TODO]
-Worth (1 worthless, 10 worth doing): [TODO]
+Difficulty (1 is easy, 10 hard): 6
+Interesting (1 boring, 10 interesting): 4
+Worth (1 worthless, 10 worth doing): 5
 
 If you have any more comments about this assignment, put them below:
 
-[TODO]
+[DONE]
 
 Finally, type out the honor code below, followed by each member's name. Also, describe any help you received from any source, including me:
 
 [TODO]
+
+Sources: Textbook
