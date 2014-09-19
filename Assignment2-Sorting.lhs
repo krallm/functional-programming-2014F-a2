@@ -280,6 +280,11 @@ This is a "higher-order" function. It takes a function as input, specifically a 
 
 [DONE: Haskell Code Here, change function definition]
 
+correctOutputForInput takes two lists and checks if the second list is a sorted
+version of the first list. It performs two checks: first, that the second list
+is sorted (isSorted), and then checks if both lists contain the same elements
+(isRearranged).
+
 >correctOutputForInput xs ys = and [(isSorted ys), (isRearranged xs ys)]
 >  where
 >    isSorted :: Ord a => [a] -> Bool
